@@ -38,16 +38,23 @@ fi
 
 az postgres flexible-server db create -g "$RESOURCE_GROUP" --server-name "$PG_SERVER" \
   --name "$PG_DB" --output none
-az postgres flexible-server firewall-rule create -g "$RESOURCE_GROUP" -n "$PG_SERVER" \
-  --rule-name allow-azure-services --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0 --output none
+az postgres flexible-server firewall-rule create -g "$RESOURCE_GROUP" --server-name "$PG_SERVER" \
+  --name allow-azure-services --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0 --output none
 
-MY_IP=$(curl --fail --silent --show-error --connect-timeout 10 --max-time 20 https://api.ipify.org)
-if [[ ! "$MY_IP" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-  echo "Nao foi possivel identificar o IPv4 para a conexao SQL." >&2
-  exit 1
+MY_IP="${DEVELOPER_IP:-}"
+if [[ -z "$MY_IP" ]]; then
+  read -r -p "IPv4 do cliente SQL (Enter para configurar depois no Portal Azure): " MY_IP
 fi
-az postgres flexible-server firewall-rule create -g "$RESOURCE_GROUP" -n "$PG_SERVER" \
-  --rule-name allow-developer-ip --start-ip-address "$MY_IP" --end-ip-address "$MY_IP" --output none
+if [[ -n "$MY_IP" ]]; then
+  if [[ ! "$MY_IP" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+    echo "Informe um IPv4 valido em DEVELOPER_IP." >&2
+    exit 1
+  fi
+  az postgres flexible-server firewall-rule create -g "$RESOURCE_GROUP" --server-name "$PG_SERVER" \
+    --name allow-developer-ip --start-ip-address "$MY_IP" --end-ip-address "$MY_IP" --output none
+else
+  echo "Acesso SQL local pendente: adicione seu IP na pagina Rede do PostgreSQL no Portal Azure."
+fi
 
 echo "Infraestrutura configurada."
 printf 'DB_URL=jdbc:postgresql://%s.postgres.database.azure.com:5432/%s?sslmode=require\n' "$PG_SERVER" "$PG_DB"

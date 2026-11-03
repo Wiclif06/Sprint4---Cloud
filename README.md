@@ -47,7 +47,7 @@ az login
 bash scripts/provision.sh
 ```
 
-O script solicita as credenciais do PostgreSQL e cria o grupo de recursos, ACR, PostgreSQL e regras de firewall. A conexão usa TLS (`sslmode=require`). O firewall permite conexões de serviços Azure e do IP da máquina que executou o script; se esse IP mudar, execute-o novamente.
+O script solicita as credenciais do PostgreSQL e cria o grupo de recursos, ACR, PostgreSQL e regras de firewall. A conexão usa TLS (`sslmode=require`). Para liberar o cliente SQL, informe seu IPv4 quando solicitado, defina `DEVELOPER_IP` ou adicione o IP atual na página Rede do servidor no Portal Azure. Se o IP mudar, atualize a regra correspondente.
 
 No Azure DevOps:
 
