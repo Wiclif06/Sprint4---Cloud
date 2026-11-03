@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1000" width="1800" height="1000" font-family="DejaVu Sans, Arial, Helvetica, sans-serif">
+<defs>
+<marker id="ah-0b3d6e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0b3d6e"/></marker>
+<marker id="ah-b26a00" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b26a00"/></marker>
+<marker id="ah-2e7d32" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d32"/></marker>
+<marker id="ah-0078D4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0078D4"/></marker>
+</defs>
+<rect width="1800" height="1000" fill="#ffffff"/>
+<text x="900.0" y="46.0" font-size="28" fill="#0b3d6e" font-weight="bold" text-anchor="middle">PetJourney na Azure — Arquitetura da Solução + Fluxo CI/CD</text>
+<text x="900.0" y="76.0" font-size="15" fill="#5b6770" font-weight="normal" text-anchor="middle">Challenge 2026 · DevOps Tools &amp; Cloud Computing · Sprint 4  (números = ordem de execução do fluxo)</text>
+<rect x="30" y="150" width="240" height="200" rx="12" fill="#fff8f0" stroke="#c55a11" stroke-width="2"/>
+<circle cx="150" cy="183" r="16" fill="#f4b183" stroke="#c55a11" stroke-width="2"/>
+<path d="M120,235 Q120,203 150,203 Q180,203 180,235 Z" fill="#f4b183" stroke="#c55a11" stroke-width="2"/>
+<text x="150" y="261.0" font-size="16" fill="#1b2630" font-weight="bold" text-anchor="middle">Desenvolvedor</text>
+<text x="150" y="281.0" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">persona</text>
+<text x="150" y="305.0" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">IDE (IntelliJ / VS Code)</text>
+<text x="150" y="321.9" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">+ Git</text>
+<rect x="30" y="440" width="240" height="200" rx="12" fill="#f3f8ff" stroke="#0078D4" stroke-width="2"/>
+<text x="150" y="480.0" font-size="17" fill="#0b3d6e" font-weight="bold" text-anchor="middle">Repositório de código</text>
+<text x="150" y="510.0" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">GitHub (entrega final)</text>
+<text x="150" y="528.2" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">Azure Repos (fonte da</text>
+<text x="150" y="546.4" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">pipeline) — branch master</text>
+<text x="150" y="600.0" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">Git · versionamento</text>
+<polyline points="150,350 150,440" fill="none" stroke="#0b3d6e" stroke-width="2.5" marker-end="url(#ah-0b3d6e)"/>
+<circle cx="150" cy="395" r="16" fill="#0b3d6e"/>
+<text x="150" y="400.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">1</text>
+<text x="172" y="400.0" font-size="14" fill="#0b3d6e" font-weight="bold" text-anchor="start">git push</text>
+<polyline points="270,540 330,540" fill="none" stroke="#0b3d6e" stroke-width="2.5" marker-end="url(#ah-0b3d6e)"/>
+<circle cx="300" cy="508" r="16" fill="#0b3d6e"/>
+<text x="300" y="513.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">2</text>
+<text x="150" y="665.0" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">commit na master dispara a pipeline</text>
+<rect x="330" y="110" width="680" height="780" rx="16" fill="#f7fbff" stroke="#0b3d6e" stroke-width="3"/>
+<text x="670" y="142.0" font-size="17" fill="#0b3d6e" font-weight="bold" text-anchor="middle">Azure DevOps — projeto “Sprint 4 – Azure DevOps”  ·  Azure Pipelines</text>
+<rect x="350" y="165" width="640" height="250" rx="12" fill="#ffffff" stroke="#0078D4" stroke-width="2"/>
+<text x="670" y="192.0" font-size="16" fill="#0078D4" font-weight="bold" text-anchor="middle">CI — Integração Contínua (gatilho: push na master)</text>
+<rect x="365" y="210" width="185" height="190" rx="12" fill="#ffffff" stroke="#0078D4" stroke-width="2"/>
+<circle cx="457" cy="240" r="16" fill="#0078D4"/>
+<text x="457" y="245.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">3</text>
+<text x="457" y="282.0" font-size="15" fill="#0078D4" font-weight="bold" text-anchor="middle">Build Maven</text>
+<text x="457" y="315.0" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">Maven@4</text>
+<text x="457" y="333.2" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">mvn clean verify</text>
+<text x="457" y="351.4" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">JDK 17</text>
+<rect x="575" y="210" width="185" height="190" rx="12" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
+<circle cx="667" cy="240" r="16" fill="#2e7d32"/>
+<text x="667" y="245.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">4</text>
+<text x="667" y="282.0" font-size="15" fill="#2e7d32" font-weight="bold" text-anchor="middle">Testes automáticos</text>
+<text x="667" y="315.0" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">JUnit 5 + Mockito</text>
+<text x="667" y="333.2" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">padrão AAA</text>
+<text x="667" y="351.4" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">resultado publicado</text>
+<text x="667" y="369.6" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">no Azure DevOps</text>
+<rect x="785" y="210" width="185" height="190" rx="12" fill="#ffffff" stroke="#0078D4" stroke-width="2"/>
+<circle cx="877" cy="240" r="16" fill="#0078D4"/>
+<text x="877" y="245.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">5</text>
+<text x="877" y="282.0" font-size="15" fill="#0078D4" font-weight="bold" text-anchor="middle">Publica artefato</text>
+<text x="877" y="315.0" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">app.jar +</text>
+<text x="877" y="333.2" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">Dockerfile.runtime</text>
+<text x="877" y="351.4" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">artefato “drop”</text>
+<text x="877" y="369.6" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">no Azure DevOps</text>
+<polyline points="550,305 575,305" fill="none" stroke="#0078D4" stroke-width="2.5" marker-end="url(#ah-0078D4)"/>
+<polyline points="760,305 785,305" fill="none" stroke="#0078D4" stroke-width="2.5" marker-end="url(#ah-0078D4)"/>
+<rect x="350" y="495" width="640" height="275" rx="12" fill="#ffffff" stroke="#0078D4" stroke-width="2"/>
+<text x="670" y="522.0" font-size="16" fill="#0078D4" font-weight="bold" text-anchor="middle">CD — Entrega Contínua (dispara após novo artefato)</text>
+<rect x="365" y="545" width="135" height="205" rx="12" fill="#ffffff" stroke="#0078D4" stroke-width="2"/>
+<circle cx="432" cy="578" r="16" fill="#0078D4"/>
+<text x="432" y="583.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">6</text>
+<text x="432" y="618.0" font-size="13" fill="#0078D4" font-weight="bold" text-anchor="middle">Baixa o artefato</text>
+<text x="432" y="655.0" font-size="13" fill="#1b2630" font-weight="normal" text-anchor="middle">download do</text>
+<text x="432" y="671.9" font-size="13" fill="#1b2630" font-weight="normal" text-anchor="middle">artefato “drop”</text>
+<text x="432" y="688.8" font-size="13" fill="#1b2630" font-weight="normal" text-anchor="middle">gerado no CI</text>
+<rect x="525" y="545" width="135" height="205" rx="12" fill="#ffffff" stroke="#0078D4" stroke-width="2"/>
+<circle cx="592" cy="578" r="16" fill="#0078D4"/>
+<text x="592" y="583.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">7</text>
+<text x="592" y="618.0" font-size="13" fill="#0078D4" font-weight="bold" text-anchor="middle">Imagem no ACR</text>
+<text x="592" y="655.0" font-size="13" fill="#1b2630" font-weight="normal" text-anchor="middle">docker build +</text>
+<text x="592" y="671.9" font-size="13" fill="#1b2630" font-weight="normal" text-anchor="middle">docker push</text>
+<text x="592" y="688.8" font-size="13" fill="#1b2630" font-weight="normal" text-anchor="middle">(AzureCLI@2)</text>
+<rect x="685" y="545" width="135" height="205" rx="12" fill="#ffffff" stroke="#0078D4" stroke-width="2"/>
+<circle cx="752" cy="578" r="16" fill="#0078D4"/>
+<text x="752" y="583.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">8</text>
+<text x="752" y="618.0" font-size="13" fill="#0078D4" font-weight="bold" text-anchor="middle">Deploy no ACI</text>
+<text x="752" y="655.0" font-size="13" fill="#1b2630" font-weight="normal" text-anchor="middle">az container</text>
+<text x="752" y="671.9" font-size="13" fill="#1b2630" font-weight="normal" text-anchor="middle">create (API)</text>
+<text x="752" y="688.8" font-size="13" fill="#1b2630" font-weight="normal" text-anchor="middle">segredos via env</text>
+<rect x="845" y="545" width="135" height="205" rx="12" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
+<circle cx="912" cy="578" r="16" fill="#2e7d32"/>
+<text x="912" y="583.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">9</text>
+<text x="912" y="618.0" font-size="13" fill="#2e7d32" font-weight="bold" text-anchor="middle">Teste de fumaça</text>
+<text x="912" y="655.0" font-size="12" fill="#1b2630" font-weight="normal" text-anchor="middle">/actuator/health</text>
+<text x="912" y="671.9" font-size="13" fill="#1b2630" font-weight="normal" text-anchor="middle">API + banco UP</text>
+<text x="912" y="688.8" font-size="13" fill="#1b2630" font-weight="normal" text-anchor="middle">OpenAPI OK</text>
+<polyline points="500,650 525,650" fill="none" stroke="#0078D4" stroke-width="2.5" marker-end="url(#ah-0078D4)"/>
+<polyline points="660,650 685,650" fill="none" stroke="#0078D4" stroke-width="2.5" marker-end="url(#ah-0078D4)"/>
+<polyline points="820,650 845,650" fill="none" stroke="#0078D4" stroke-width="2.5" marker-end="url(#ah-0078D4)"/>
+<polyline points="670,435 670,495" fill="none" stroke="#0b3d6e" stroke-width="2.5" marker-end="url(#ah-0b3d6e)"/>
+<text x="684" y="468.0" font-size="13" fill="#0b3d6e" font-weight="bold" text-anchor="start">artefato gerado → CD</text>
+<rect x="350" y="790" width="640" height="85" rx="12" fill="#fff7e6" stroke="#b26a00" stroke-width="2"/>
+<text x="670" y="817.0" font-size="15" fill="#b26a00" font-weight="bold" text-anchor="middle">Pipelines › Library — Variable Group “petjourney-secrets”</text>
+<text x="670" y="840.0" font-size="12" fill="#1b2630" font-weight="normal" text-anchor="middle">DB_URL · DB_USERNAME · DB_PASSWORD · ADMIN_USERNAME · ADMIN_PASSWORD</text>
+<text x="670" y="860.0" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">variáveis secretas + Service Connection (ARM)</text>
+<polyline points="670,790 670,770" fill="none" stroke="#b26a00" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#ah-b26a00)"/>
+<rect x="1120" y="110" width="470" height="780" rx="16" fill="#f3f9ff" stroke="#0078D4" stroke-width="3"/>
+<text x="1355" y="142.0" font-size="16" fill="#0b3d6e" font-weight="bold" text-anchor="middle">Microsoft Azure — rg-petjourney-sprint4</text>
+<rect x="1145" y="175" width="420" height="130" rx="12" fill="#ffffff" stroke="#0078D4" stroke-width="2"/>
+<text x="1355" y="208.0" font-size="16" fill="#0078D4" font-weight="bold" text-anchor="middle">Azure Container Registry (ACR)</text>
+<text x="1355" y="238.0" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">acrpetjourneys4563412</text>
+<text x="1355" y="256.2" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">imagem petjourney-api:&lt;BuildId&gt;</text>
+<rect x="1145" y="385" width="420" height="170" rx="12" fill="#ffffff" stroke="#0078D4" stroke-width="2"/>
+<text x="1355" y="418.0" font-size="16" fill="#0078D4" font-weight="bold" text-anchor="middle">Azure Container Instances (ACI)</text>
+<text x="1355" y="448.0" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">API PetJourney — Spring Boot (Java 17)</text>
+<text x="1355" y="466.2" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">container NÃO-root (appuser) · porta 8080</text>
+<text x="1355" y="484.4" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">Swagger: /swagger-ui.html</text>
+<rect x="1145" y="650" width="420" height="190" rx="12" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
+<text x="1355" y="683.0" font-size="16" fill="#2e7d32" font-weight="bold" text-anchor="middle">Azure Database for PostgreSQL</text>
+<text x="1355" y="713.0" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">Flexible Server 16 (PaaS) — banco em nuvem</text>
+<text x="1355" y="731.2" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">tb_clinica ⟷ tb_veterinario (Flyway)</text>
+<text x="1355" y="749.4" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">dados persistem fora do ACI</text>
+<text x="1355" y="815.0" font-size="12" fill="#5b6770" font-weight="normal" text-anchor="middle">SSL obrigatório · firewall controlado</text>
+<polyline points="990,560 1045,560 1045,240 1145,240" fill="none" stroke="#0b3d6e" stroke-width="2.5" marker-end="url(#ah-0b3d6e)"/>
+<circle cx="1045" cy="400" r="16" fill="#0b3d6e"/>
+<text x="1045" y="405.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">7</text>
+<polyline points="990,630 1070,630 1070,470 1145,470" fill="none" stroke="#0b3d6e" stroke-width="2.5" marker-end="url(#ah-0b3d6e)"/>
+<circle cx="1070" cy="550" r="16" fill="#0b3d6e"/>
+<text x="1070" y="555.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">8</text>
+<polyline points="990,700 1095,700 1095,520 1145,520" fill="none" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#ah-2e7d32)"/>
+<circle cx="1095" cy="610" r="16" fill="#2e7d32"/>
+<text x="1095" y="615.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">9</text>
+<text x="1052" y="262.0" font-size="12" fill="#0b3d6e" font-weight="normal" text-anchor="start">push</text>
+<text x="1076" y="462.0" font-size="12" fill="#0b3d6e" font-weight="normal" text-anchor="start">deploy</text>
+<text x="1100" y="540.0" font-size="12" fill="#2e7d32" font-weight="normal" text-anchor="start">teste</text>
+<polyline points="1355,305 1355,385" fill="none" stroke="#0b3d6e" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#ah-0b3d6e)"/>
+<text x="1370" y="350.0" font-size="13" fill="#0b3d6e" font-weight="normal" text-anchor="start">pull da imagem</text>
+<polyline points="1355,555 1355,650" fill="none" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#ah-2e7d32)"/>
+<text x="1370" y="608.0" font-size="13" fill="#2e7d32" font-weight="bold" text-anchor="start">JDBC / SSL :5432</text>
+<rect x="1625" y="360" width="165" height="230" rx="12" fill="#fff8f0" stroke="#c55a11" stroke-width="2"/>
+<circle cx="1707" cy="398" r="16" fill="#f4b183" stroke="#c55a11" stroke-width="2"/>
+<path d="M1677,450 Q1677,418 1707,418 Q1737,418 1737,450 Z" fill="#f4b183" stroke="#c55a11" stroke-width="2"/>
+<text x="1707" y="476.0" font-size="16" fill="#1b2630" font-weight="bold" text-anchor="middle">Usuário final</text>
+<text x="1707" y="496.0" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">persona</text>
+<text x="1707" y="520.0" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">Swagger UI,</text>
+<text x="1707" y="536.9" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">Postman ou curl</text>
+<text x="1707" y="553.8" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">+ SELECT no banco</text>
+<text x="1707" y="570.7" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">(evidência CRUD)</text>
+<polyline points="1625,470 1565,470" fill="none" stroke="#0b3d6e" stroke-width="2.5" marker-end="url(#ah-0b3d6e)"/>
+<circle cx="1595" cy="440" r="16" fill="#0b3d6e"/>
+<text x="1595" y="445.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">10</text>
+<text x="1595" y="500.0" font-size="12" fill="#0b3d6e" font-weight="bold" text-anchor="middle">HTTP</text>
+<text x="1595" y="515.6" font-size="12" fill="#0b3d6e" font-weight="bold" text-anchor="middle">:8080</text>
+<text x="30" y="940.0" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="start">Legenda:  seta cheia = fluxo principal  ·  seta tracejada = dependência / leitura  ·  azul = Azure DevOps/Azure  ·  verde = testes e banco  ·  laranja = segredos</text>
+<text x="30" y="962.0" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="start">Ferramentas: Git/GitHub · Azure Repos · Azure Pipelines (Maven@4, AzureCLI@2, PublishPipelineArtifact) · Docker · Azure CLI · ACR · ACI · Azure Database for PostgreSQL</text>
+</svg>

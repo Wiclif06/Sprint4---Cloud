@@ -1,0 +1,15 @@
+.git
+.github
+.idea
+.vscode
+target
+outputs
+work
+.env
+.env.*
+*.log
+*.zip
+docs
+src/main/resources/app.key
+src/main/resources/app.pub
+

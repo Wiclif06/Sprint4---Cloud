@@ -1,0 +1,110 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: petjourney-secrets
+  - name: azureServiceConnection
+    value: sc-azure-petjourney
+
+stages:
+  - stage: CI
+    displayName: Build e testes
+    jobs:
+      - job: build_test
+        displayName: Compilar, testar e publicar
+        steps:
+          - checkout: self
+            clean: true
+
+          - task: Maven@4
+            displayName: Maven verify
+            inputs:
+              mavenPOMFile: pom.xml
+              goals: clean verify
+              options: -B -ntp
+              javaHomeOption: JDKVersion
+              jdkVersionOption: '1.17'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              testRunTitle: PetJourney
+
+          - bash: |
+              set -euo pipefail
+              for script in scripts/*.sh; do bash -n "$script"; done
+              DROP="$(Build.ArtifactStagingDirectory)/drop"
+              mkdir -p "$DROP/scripts"
+              cp target/app.jar Dockerfile.runtime docker-entrypoint.sh "$DROP/"
+              cp scripts/env.sh scripts/deploy.sh scripts/smoke-test.sh "$DROP/scripts/"
+              jq -n --arg build "$(Build.BuildId)" --arg commit "$(Build.SourceVersion)" \
+                '{build: $build, commit: $commit}' > "$DROP/build-info.json"
+              cd "$DROP"
+              sha256sum app.jar Dockerfile.runtime docker-entrypoint.sh build-info.json scripts/*.sh > SHA256SUMS
+            displayName: Preparar artefato e checksums
+
+          - task: PublishPipelineArtifact@1
+            displayName: Publicar drop
+            inputs:
+              targetPath: $(Build.ArtifactStagingDirectory)/drop
+              artifact: drop
+              publishLocation: pipeline
+
+  - stage: CD
+    displayName: Deploy no Azure
+    dependsOn: CI
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    jobs:
+      - deployment: deploy_aci
+        displayName: Publicar API no ACI
+        environment: petjourney-aci
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: none
+                - download: current
+                  artifact: drop
+
+                - task: AzureCLI@2
+                  displayName: Build da imagem e deploy
+                  inputs:
+                    azureSubscription: $(azureServiceConnection)
+                    scriptType: bash
+                    scriptLocation: inlineScript
+                    inlineScript: |
+                      bash "$ARTIFACT_DIR/scripts/deploy.sh"
+                  env:
+                    ARTIFACT_DIR: $(Pipeline.Workspace)/drop
+                    IMAGE_TAG: $(Build.BuildId)
+                    SOURCE_COMMIT: $(Build.SourceVersion)
+                    DB_URL: $(DB_URL)
+                    DB_USERNAME: $(DB_USERNAME)
+                    DB_PASSWORD: $(DB_PASSWORD)
+                    ADMIN_USERNAME: $(ADMIN_USERNAME)
+                    ADMIN_PASSWORD: $(ADMIN_PASSWORD)
+
+                - bash: |
+                    bash "$(Pipeline.Workspace)/drop/scripts/smoke-test.sh" "$API_URL"
+                  displayName: Verificar API e banco de dados
+                  env:
+                    API_URL: $(apiUrl)
+
+                - task: AzureCLI@2
+                  displayName: Diagnostico do ACI
+                  condition: failed()
+                  inputs:
+                    azureSubscription: $(azureServiceConnection)
+                    scriptType: bash
+                    scriptLocation: inlineScript
+                    inlineScript: |
+                      source "$(Pipeline.Workspace)/drop/scripts/env.sh"
+                      az container show -g "$RESOURCE_GROUP" -n "$ACI_API_NAME" \
+                        --query "{state:instanceView.state,containers:containers[].{name:name,state:instanceView.currentState.state,events:instanceView.events}}" -o json
+
