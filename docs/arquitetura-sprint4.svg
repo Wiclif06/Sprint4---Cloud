@@ -96,7 +96,7 @@
 <rect x="350" y="790" width="640" height="85" rx="12" fill="#fff7e6" stroke="#b26a00" stroke-width="2"/>
 <text x="670" y="817.0" font-size="15" fill="#b26a00" font-weight="bold" text-anchor="middle">Pipelines › Library — Variable Group “petjourney-secrets”</text>
 <text x="670" y="840.0" font-size="12" fill="#1b2630" font-weight="normal" text-anchor="middle">DB_URL · DB_USERNAME · DB_PASSWORD · ADMIN_USERNAME · ADMIN_PASSWORD</text>
-<text x="670" y="860.0" font-size="13" fill="#5b6770" font-weight="normal" text-anchor="middle">variáveis secretas + Service Connection (ARM)</text>
+<text x="670" y="860.0" font-size="12" fill="#5b6770" font-weight="normal" text-anchor="middle">variáveis secretas + Service Connection (WIF) + identidade gerenciada (AcrPull)</text>
 <polyline points="670,790 670,770" fill="none" stroke="#b26a00" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#ah-b26a00)"/>
 <rect x="1120" y="110" width="470" height="780" rx="16" fill="#f3f9ff" stroke="#0078D4" stroke-width="3"/>
 <text x="1355" y="142.0" font-size="16" fill="#0b3d6e" font-weight="bold" text-anchor="middle">Microsoft Azure — rg-petjourney-sprint4</text>
@@ -104,6 +104,7 @@
 <text x="1355" y="208.0" font-size="16" fill="#0078D4" font-weight="bold" text-anchor="middle">Azure Container Registry (ACR)</text>
 <text x="1355" y="238.0" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">acrpetjourneys4563412</text>
 <text x="1355" y="256.2" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">imagem petjourney-api:&lt;BuildId&gt;</text>
+<text x="1355" y="281.0" font-size="12" fill="#5b6770" font-weight="normal" text-anchor="middle">Admin desabilitado · pull com identidade gerenciada</text>
 <rect x="1145" y="385" width="420" height="170" rx="12" fill="#ffffff" stroke="#0078D4" stroke-width="2"/>
 <text x="1355" y="418.0" font-size="16" fill="#0078D4" font-weight="bold" text-anchor="middle">Azure Container Instances (ACI)</text>
 <text x="1355" y="448.0" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">API PetJourney — Spring Boot (Java 17)</text>
@@ -114,7 +115,7 @@
 <text x="1355" y="713.0" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">Flexible Server 16 (PaaS) — banco em nuvem</text>
 <text x="1355" y="731.2" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">tb_clinica ⟷ tb_veterinario (Flyway)</text>
 <text x="1355" y="749.4" font-size="14" fill="#1b2630" font-weight="normal" text-anchor="middle">dados persistem fora do ACI</text>
-<text x="1355" y="815.0" font-size="12" fill="#5b6770" font-weight="normal" text-anchor="middle">SSL obrigatório · firewall controlado</text>
+<text x="1355" y="815.0" font-size="12" fill="#5b6770" font-weight="normal" text-anchor="middle">TLS obrigatório · Canada Central</text>
 <polyline points="990,560 1045,560 1045,240 1145,240" fill="none" stroke="#0b3d6e" stroke-width="2.5" marker-end="url(#ah-0b3d6e)"/>
 <circle cx="1045" cy="400" r="16" fill="#0b3d6e"/>
 <text x="1045" y="405.5" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">7</text>

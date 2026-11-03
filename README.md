@@ -23,6 +23,8 @@ Java 17, Spring Boot 3.5, Spring Security, Spring Data JPA, Flyway, PostgreSQL 1
 
 O banco usa Azure Database for PostgreSQL Flexible Server. Os dados ficam no serviço de banco, separados do container da API, e são preservados nos deploys. O Flyway aplica as migrações de `src/main/resources/db/migration`; o Hibernate valida o esquema na inicialização.
 
+O PostgreSQL usa Canada Central; ACR e ACI usam East US. A API lê a imagem privada com uma identidade gerenciada que possui `AcrPull` somente no registro. A conta administrativa do ACR fica desabilitada.
+
 ## CI/CD
 
 A pipeline está em [azure-pipelines.yml](azure-pipelines.yml) e usa a branch `master`.
@@ -49,10 +51,10 @@ O script solicita as credenciais do PostgreSQL e cria o grupo de recursos, ACR, 
 
 No Azure DevOps:
 
-- Projeto **Sprint 4 – Azure DevOps**, **Private**, **Git**, processo **Scrum ou Agile**.
+- Projeto **Sprint 4 – Azure DevOps**, **Private**, **Git**, processo **Agile**.
 - Descrição: **Projeto para entrega da Sprint 4 do professor Joao Carlos Menk**, seguida dos integrantes, RMs e turmas.
 - Professor com acesso **Basic** e permissão de administrador do projeto. E-mails informados: `profjoao.menk@fiap.com.br` / `pf0841@fiap.com.br`.
-- Service Connection Azure Resource Manager chamada `sc-azure-petjourney`, com acesso ao grupo de recursos.
+- Service Connection Azure Resource Manager chamada `sc-azure-petjourney`, com federação de identidade e acesso limitado ao grupo `rg-petjourney-sprint4`.
 - Variable Group `petjourney-secrets`, autorizado para esta pipeline, com as variáveis abaixo.
 - Ambiente `petjourney-aci`, autorizado para a pipeline e sem aprovação manual de deploy.
 - Pipeline conectada ao repositório da aplicação, usando `/azure-pipelines.yml` na branch `master`.
@@ -62,19 +64,12 @@ No Azure DevOps:
 | `DB_URL` | URL JDBC exibida pelo provisionamento |
 | `DB_USERNAME` | Administrador do PostgreSQL |
 | `DB_PASSWORD` | Senha do PostgreSQL |
-| `ADMIN_USERNAME` | Login do administrador do sistema |
+| `ADMIN_USERNAME` | E-mail do administrador do sistema |
 | `ADMIN_PASSWORD` | Senha inicial desse administrador, de 12 a 72 caracteres ASCII |
 
 **Marque as cinco variáveis como secret.** Elas são repassadas ao ACI como variáveis protegidas. O administrador da aplicação é criado no primeiro início; reinicializações preservam sua conta e senha. Alterar `ADMIN_PASSWORD` depois disso não redefine uma conta existente.
 
-Se o repositório ainda usa `main`, crie `master` com o conteúdo final e publique-a no repositório conectado à pipeline:
-
-```bash
-git switch -c master
-git push -u origin master
-```
-
-Quando Azure Repos for usado como origem da pipeline, mantenha a mesma versão também no GitHub da entrega.
+**Projeto Azure DevOps:** [Sprint 4 – Azure DevOps](https://dev.azure.com/sprint4-cloud/Sprint%204%20%E2%80%93%20Azure%20DevOps).
 
 ## Build e testes
 
@@ -103,9 +98,9 @@ az container show -g "$RESOURCE_GROUP" -n "$ACI_API_NAME" --query ipAddress.fqdn
 
 | Recurso | Endereço |
 |---|---|
-| Swagger | `http://<FQDN>:8080/swagger-ui.html` |
-| OpenAPI | `http://<FQDN>:8080/api-docs` |
-| Saúde da aplicação e banco | `http://<FQDN>:8080/actuator/health` |
+| Swagger | `http://petjourney-api-s4-563412.eastus.azurecontainer.io:8080/swagger-ui.html` |
+| OpenAPI | `http://petjourney-api-s4-563412.eastus.azurecontainer.io:8080/api-docs` |
+| Saúde da aplicação e banco | `http://petjourney-api-s4-563412.eastus.azurecontainer.io:8080/actuator/health` |
 
 O endpoint de saúde retorna apenas o estado, sem dados internos.
 

@@ -26,21 +26,17 @@ docker build --build-arg SOURCE_COMMIT="$SOURCE_COMMIT" \
   --build-arg BUILD_ID="$IMAGE_TAG" -f Dockerfile.runtime -t "$IMAGE" .
 docker push "$IMAGE"
 
-ACR_USER=$(az acr credential show --name "$ACR_NAME" --query username -o tsv)
-ACR_PASS=$(az acr credential show --name "$ACR_NAME" --query 'passwords[0].value' -o tsv)
-echo "##vso[task.setsecret]$ACR_USER"
-echo "##vso[task.setsecret]$ACR_PASS"
+ACR_IDENTITY=$(az identity show -g "$RESOURCE_GROUP" -n "$ACI_IDENTITY_NAME" --query id -o tsv)
 
 az container create --resource-group "$RESOURCE_GROUP" --name "$ACI_API_NAME" \
   --location "$LOCATION" --image "$IMAGE" --registry-login-server "$ACR_SERVER" \
-  --registry-username "$ACR_USER" --registry-password "$ACR_PASS" \
+  --assign-identity "$ACR_IDENTITY" --acr-identity "$ACR_IDENTITY" \
   --os-type Linux --ip-address Public --dns-name-label "$ACI_API_DNS" \
   --ports 8080 --cpu 1 --memory 1.5 --restart-policy Always \
   --environment-variables MAIL_ENABLED=false BOOTSTRAP_ADMIN_ENABLED=true DB_CONNECTION_TIMEOUT=5000 \
   --secure-environment-variables DB_URL="$DB_URL" DB_USERNAME="$DB_USERNAME" \
     DB_PASSWORD="$DB_PASSWORD" ADMIN_USERNAME="$ADMIN_USERNAME" ADMIN_PASSWORD="$ADMIN_PASSWORD" \
   --output none
-unset ACR_PASS
 
 FQDN=$(az container show -g "$RESOURCE_GROUP" -n "$ACI_API_NAME" --query ipAddress.fqdn -o tsv)
 test -n "$FQDN"
