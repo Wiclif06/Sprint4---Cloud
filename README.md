@@ -11,7 +11,8 @@ API para gestão de clínicas veterinárias: clínicas, profissionais, tutores, 
 | Vinicius Paschoeto da Silva | 563089 | TDSPX |
 
 **Professor:** Joao Carlos Menk  
-**Repositório:** [Wiclif06/Sprint4---Cloud](https://github.com/Wiclif06/Sprint4---Cloud)
+**Repositório:** [Wiclif06/Sprint4---Cloud](https://github.com/Wiclif06/Sprint4---Cloud)  
+**Vídeo de apresentação:** [Assistir à demonstração da Sprint 4](https://drive.google.com/file/d/15X21wZn8srAkPCs7H5jjdpQ_g2-xhEYW/view?usp=sharing)
 
 ## Tecnologias
 
