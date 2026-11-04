@@ -69,6 +69,8 @@ No Azure DevOps:
 
 **Marque as cinco variáveis como secret.** Elas são repassadas ao ACI como variáveis protegidas. O administrador da aplicação é criado no primeiro início; reinicializações preservam sua conta e senha. Alterar `ADMIN_PASSWORD` depois disso não redefine uma conta existente.
 
+A migração V8 desativa as contas dos dados de exemplo que ainda usam a senha padrão. O acesso inicial da implantação usa o administrador configurado nas variáveis protegidas.
+
 **Projeto Azure DevOps:** [Sprint 4 – Azure DevOps](https://dev.azure.com/sprint4-cloud/Sprint%204%20%E2%80%93%20Azure%20DevOps).
 
 ## Build e testes
